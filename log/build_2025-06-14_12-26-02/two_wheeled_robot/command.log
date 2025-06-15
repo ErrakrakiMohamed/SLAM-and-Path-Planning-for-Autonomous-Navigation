@@ -1,0 +1,4 @@
+Invoking command in '/home/abdelaali/dev_ws/build/two_wheeled_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/abdelaali/dev_ws/build/two_wheeled_robot -- -j4 -l4
+Invoked command in '/home/abdelaali/dev_ws/build/two_wheeled_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/abdelaali/dev_ws/build/two_wheeled_robot -- -j4 -l4
+Invoking command in '/home/abdelaali/dev_ws/build/two_wheeled_robot': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/abdelaali/dev_ws/build/two_wheeled_robot
+Invoked command in '/home/abdelaali/dev_ws/build/two_wheeled_robot' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/abdelaali/dev_ws/build/two_wheeled_robot
