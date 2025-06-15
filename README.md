@@ -110,7 +110,7 @@ Use RViz2 to set initial pose and navigation goals with the interactive tools.
 
 ## Advanced Features
 
-### Dynamic Obstacle Management
+### Dynamic Obstacle Management ((Under Development)
 Our system features advanced real-time obstacle detection and avoidance:
 - Dynamic costmap updates from sensor data
 - DWA (Dynamic Window Approach) local planning
@@ -132,15 +132,12 @@ Optimized for real-time operation with:
 - [ ] **Advanced UI/UX** - Intuitive control interface
 - [ ] **Machine Learning Integration** - Predictive navigation behaviors
 
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ## Team
 
-- **[Member 1 Name]** - Project Lead & SLAM Development
-- **[Member 2 Name]** - Navigation Stack & Path Planning
-- **[Member 3 Name]** - Simulation & Testing
+- **Errakraki Mohamed** - Workspace Setup
+- **Hossam EL-MOSSAID** - SLAM Map Generation
+- **ABDELAALI Ismail** - Path Planning
 
 ## License
 
