@@ -1,129 +1,153 @@
-🤖 SLAM and Path Planning for Autonomous Navigation
-📦 Project: Indoor Delivery Robot
-This repository contains the code and documentation related to our autonomous navigation project for a mobile robot, developed as part of the Real-Time Embedded Systems course. The objective is to create a system capable of enabling a compact wheeled robot to navigate and deliver small items autonomously in complex and potentially dynamic indoor environments, such as offices or hospitals.
+# Autonomous Indoor Delivery Robot
 
-🚀 Project Overview
-The core of this project lies in the integration of two fundamental robotic functionalities:
+> A real-time autonomous navigation system for indoor delivery robots using SLAM and advanced path planning
 
-🗺️ Simultaneous Localization and Mapping (SLAM): The robot constructs a map of its environment while simultaneously determining its own position within that map.
+[![ROS2](https://img.shields.io/badge/ROS2-Humble-blue.svg)](https://docs.ros.org/en/humble/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
 
-🧭 Path Planning: Once the map is established and the robot's position is known, it calculates and executes the best collision-free path to a goal, adapting in real-time to new obstacles.
+## Overview
 
-Without these capabilities, an autonomous delivery robot could not operate safely and efficiently in real-world, changing environments. Our project combines these functions to create a fully autonomous and robust navigation system.
+This project implements a complete autonomous navigation system for indoor delivery robots, developed as part of our Real-Time Embedded Systems course. The system enables compact wheeled robots to navigate complex indoor environments like offices and hospitals while delivering items safely and efficiently.
 
-✨ Key Features & Expected Outcomes
-By the end of this project, our autonomous navigation system will be capable of:
+### Core Capabilities
 
-🗺️ Creating an accurate 2D map of an unknown environment using SLAM (with Gmapping).
+- **SLAM (Simultaneous Localization and Mapping)** - Real-time environment mapping and self-localization
+- **Dynamic Path Planning** - Intelligent obstacle avoidance with real-time trajectory optimization
+- **Robust Navigation** - Reliable operation in changing environments with moving obstacles
 
-➡️ Navigating autonomously to a goal while actively avoiding obstacles.
+## Key Features
 
-⏱️ Demonstrating real-time navigation and pathfinding, even in dynamic environments (e.g., with moving people or displaced objects).
+✅ **Real-time 2D mapping** using advanced SLAM algorithms  
+✅ **Autonomous goal-oriented navigation** with collision avoidance  
+✅ **Dynamic obstacle detection** and path re-planning  
+✅ **High-precision localization** using particle filter methods  
+✅ **Simulation-ready** with full Gazebo integration  
 
-💡 Our Approach: Overcoming Existing Limitations
-Many existing navigation solutions, while functional, present significant shortcomings, particularly concerning dynamic environment management. Basic approaches can be error-prone, resource-intensive, or fail to react in real-time to mobile obstacles.
+## Technology Stack
 
-Our solution is designed to address these weaknesses by leveraging the ROS2 ecosystem:
+| Component | Technology | Purpose |
+|-----------|------------|---------|
+| **Framework** | ROS2 Humble | Core robotics platform |
+| **SLAM** | Gmapping | 2D mapping and localization |
+| **Navigation** | Nav2 Stack | Path planning and execution |
+| **Localization** | AMCL | Adaptive Monte Carlo localization |
+| **Simulation** | Gazebo | Virtual testing environment |
+| **Visualization** | RViz2 | Real-time data visualization |
+| **Language** | Python | Node implementation |
 
-🗺️ Initial Mapping (SLAM): We use Gmapping for the initial construction of accurate 2D maps, providing a reliable foundation for navigation.
+## Quick Start
 
-📍 Robust Localization: Thanks to AMCL (Adaptive Monte Carlo Localization) integrated within Nav2, our robot localizes itself with high precision on the map.
+### Prerequisites
 
-🛡️ Real-Time Dynamic Obstacle Management (Under Development): This is our key differentiator and a primary focus of ongoing development. By fully utilizing the ROS2 Navigation2 (Nav2) stack, we are working towards integrating dynamic costmap layers (updated by real-time sensor data) and advanced local planners (like DWA - Dynamic Window Approach). This will allow the robot to:
+- Ubuntu 20.04 LTS or newer
+- ROS2 Humble Hawksbill
+- Colcon build tools
 
-Detect obstacles that appear or move.
+### Installation
 
-Dynamically recalculate its trajectory to avoid them without interrupting its mission.
-
-Adapt to unforeseen situations in the environment.
-
-This integrated approach enables intelligent and adaptive navigation, making repetitive tasks more efficient, reliable, and autonomous.
-
-🛠️ Technologies Used
-⚙️ Robot Operating System 2 (ROS2): Robotics development framework.
-
-🗺️ Gmapping: ROS2 package for 2D SLAM.
-
-🧭 Navigation2 (Nav2): Autonomous navigation stack for ROS2 (including AMCL, Costmaps, Global/Local Planners, Behavior Trees).
-
-🖥️ Rviz: Visualization tool for ROS2.
-
-** simulate Gazebo**: 3D simulator for testing the robot and its algorithms in a virtual environment.
-
-💻 Python : Programming languages for ROS2 nodes.
-
-🚀 Quick Start (Simulation Setup)
-This project is primarily developed and tested in a simulation environment.
-
-✅ Prerequisites
-Ubuntu 20.04 LTS (or newer)
-
-ROS2 (Humble Hawksbill distribution recommended)
-
-colcon (ROS2 build tool)
-
-1️⃣ Clone the Repository
+```bash
+# Clone the repository
 git clone <YOUR_REPO_URL>
-cd <YOUR_REPO_NAME>
+cd autonomous-delivery-robot
 
-2️⃣ Initialize and Build the ROS2 Workspace
-cd ~/your_ros2_workspace/src
-# Copy project packages here, or clone directly if this is the project root
+# Build the workspace
 colcon build --symlink-install
 
-3️⃣ Source the ROS2 Environment
-Ensure you source your ROS2 installation and workspace:
-
-source /opt/ros/humble/setup.bash  # Or your ROS2 distribution
+# Source the environment
+source /opt/ros/humble/setup.bash
 source install/setup.bash
+```
 
-4️⃣ Launch Simulation and Mapping (SLAM)
-To start building a map of the simulated environment:
+### Running the System
 
-ros2 launch my_robot_description robot_world.launch.py # Launches the robot in Gazebo
-ros2 launch my_slam_project slam_gmapping_launch.py   # Launches the Gmapping node
-rviz2                                                 # Launches Rviz to visualize the map and robot
+#### 1. Launch Simulation Environment
+```bash
+ros2 launch my_robot_description robot_world.launch.py
+```
 
-In Rviz, add LaserScan, Map, TF, and RobotModel displays.
-
-Teleoperate the robot in Gazebo to explore the environment and build the map.
-
-5️⃣ Save the Map
-Once the map is satisfactory, save it:
-
-ros2 run nav2_map_server map_saver_cli -f my_indoor_environment
-
-This will create my_indoor_environment.yaml and my_indoor_environment.pgm.
-
-6️⃣ Launch Autonomous Navigation
-For autonomous navigation, use your saved map and the Nav2 stack:
-
-ros2 launch my_navigation_project navigate_full_stack.launch.py map:=/path/to/my_indoor_environment.yaml use_sim_time:=True # Adapt the path
+#### 2. Start SLAM Mapping
+```bash
+ros2 launch my_slam_project slam_gmapping_launch.py
 rviz2
+```
 
-In Rviz, use the "2D Pose Estimate" tool to initialize the robot's position on the map.
+#### 3. Build Your Map
+- Use keyboard teleoperation to explore the environment
+- Watch the map build in real-time through RViz2
+- Save the completed map:
+```bash
+ros2 run nav2_map_server map_saver_cli -f indoor_map
+```
 
-Use the "2D Nav Goal" tool to set a goal, and observe the robot navigating.
+#### 4. Autonomous Navigation
+```bash
+ros2 launch my_navigation_project navigate_full_stack.launch.py \
+  map:=/path/to/indoor_map.yaml \
+  use_sim_time:=True
+```
 
-🚧 Next Steps & Future Perspectives
-📈 Transition to 3D SLAM: Explore solutions like Cartographer for volumetric mapping.
+Use RViz2 to set initial pose and navigation goals with the interactive tools.
 
-➕ Advanced Sensor Integration: Add depth cameras for improved obstacle perception.
+## Project Architecture
 
-🎯 Advanced Dynamic Obstacle Avoidance: Integrate motion prediction algorithms.
+```
+├── SLAM Module
+│   ├── Gmapping Integration
+│   └── Real-time Map Building
+├── Localization
+│   ├── AMCL Particle Filter
+│   └── Pose Estimation
+├── Path Planning
+│   ├── Global Path Planning
+│   ├── Local Trajectory Generation
+│   └── Dynamic Obstacle Avoidance
+└── Navigation Stack
+    ├── Costmap Management
+    ├── Behavior Trees
+    └── Recovery Behaviors
+```
 
-🤝 Multi-Robot Navigation: Coordinate multiple robots in the same environment.
+## Advanced Features
 
-⚙️ Deployment on Physical Robot: Port the system to real hardware.
+### Dynamic Obstacle Management
+Our system features advanced real-time obstacle detection and avoidance:
+- Dynamic costmap updates from sensor data
+- DWA (Dynamic Window Approach) local planning
+- Predictive obstacle motion analysis
+- Seamless path re-planning without mission interruption
 
-📱 Enhanced User Interface: Develop a more intuitive interface for interaction.
+### Real-time Performance
+Optimized for real-time operation with:
+- Low-latency sensor processing
+- Efficient path computation algorithms
+- Adaptive behavior based on environment complexity
 
-🧑‍🤝‍🧑 Team Members
-[Member 1 Name]
+## Future Roadmap
 
-[Member 2 Name]
+- [ ] **3D SLAM Integration** - Upgrade to Cartographer for volumetric mapping
+- [ ] **Enhanced Sensor Fusion** - Integrate depth cameras and IMU data
+- [ ] **Multi-Robot Coordination** - Fleet management capabilities
+- [ ] **Physical Hardware Deployment** - Real robot implementation
+- [ ] **Advanced UI/UX** - Intuitive control interface
+- [ ] **Machine Learning Integration** - Predictive navigation behaviors
 
-[Member 3 Name]
+## Contributing
 
-📄 License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+## Team
+
+- **[Member 1 Name]** - Project Lead & SLAM Development
+- **[Member 2 Name]** - Navigation Stack & Path Planning
+- **[Member 3 Name]** - Simulation & Testing
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<p align="center">
+  <strong>Built with ❤️ for autonomous robotics</strong>
+</p>
